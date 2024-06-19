@@ -18,8 +18,9 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { CoinList } from "../config/api";
-
 import { CryptoState } from "../CryptoContext";
+// import { Link } from "react-alice-carousel";
+import { useNavigate } from "react-router-dom";
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -30,7 +31,7 @@ export default function CoinsTable() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-
+  const navigate = useNavigate()
   const { currency, symbol } = CryptoState();
 
   const useStyles = makeStyles({
@@ -55,7 +56,7 @@ export default function CoinsTable() {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#fff",
+        main: "#222",
       },
       type: "dark",
     },
@@ -127,11 +128,14 @@ export default function CoinsTable() {
                   .map((row) => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
-                      <TableRow
-                        // onClick={() => history.push(`/coins/${row.id}`)}
+                      
+                      <TableRow 
+                        
                         className={classes.row}
                         key={row.name}
+                        onClick={()=>navigate(`/coins/${row.name}`)}
                       >
+                       
                         <TableCell
                           component="th"
                           scope="row"
@@ -139,6 +143,7 @@ export default function CoinsTable() {
                             display: "flex",
                             gap: 15,
                           }}
+                         
                         >
                           <img
                             src={row?.image}
@@ -162,6 +167,7 @@ export default function CoinsTable() {
                             </span>
                           </div>
                         </TableCell>
+
                         <TableCell align="right">
                           {symbol}{" "}
                           {numberWithCommas(row.current_price.toFixed(2))}
@@ -184,6 +190,7 @@ export default function CoinsTable() {
                           M
                         </TableCell>
                       </TableRow>
+                  
                     );
                   })}
               </TableBody>
