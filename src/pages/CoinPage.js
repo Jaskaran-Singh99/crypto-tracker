@@ -20,6 +20,7 @@ export const CoinPage = () => {
   const fetchCoin= async ()=>{
     const {data} = await axios.get(SingleCoin(id))
     setCoin(data)
+   
   }
   console.log(coin)
 
@@ -30,7 +31,7 @@ export const CoinPage = () => {
   const useStyles = makeStyles((theme) => ({
     container: {
       display: "flex",
-      height:'100vh',
+      height:'150vh',
       backgroundColor:'black',
       color:'white',
       [theme.breakpoints.down("md")]: {

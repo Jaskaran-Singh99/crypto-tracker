@@ -133,7 +133,7 @@ export default function CoinsTable() {
                         
                         className={classes.row}
                         key={row.name}
-                        onClick={()=>navigate(`/coins/${row.name}`)}
+                        onClick={()=>navigate(`/coins/${(row.name.toLowerCase())}`)}
                       >
                        
                         <TableCell
